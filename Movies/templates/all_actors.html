@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div class="content-section">
+            {% if all_actors %}
+                {% for actor in all_actors.items %}
+                    <div class="row no-gutters bg-light position-relative">
+                        <div class="col-md-6 mb-md-0 p-md-4">
+                            <img src="..." class="w-100" alt="...">
+                        </div>
+                        <div class="col-md-6 position-static p-4 pl-md-0">
+                            <h5 class="mt-0">{{actor.actor_name}}</h5>
+                            <a href="{{ url_for('actor', id=actor['id']) }}" class="stretched-link">More about actor..</a>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}               
+            {% else %}
+                <p>...</p>
+            {% endif %}    
+            {% for page_num in all_actors.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if all_actors.page == page_num %}
+                        <a class="btn btn-info mb-4" href="{{ url_for('all_actors', page=page_num) }}">{{ page_num }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-info mb-4" href="{{ url_for('all_actors', page=page_num) }}">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    <p>...</p>
+                {% endif %}
+            {% endfor %}
+            <a class="nav-link" href="/add_actor">Add new actor</a>
+        </div>
+    {% endblock %}

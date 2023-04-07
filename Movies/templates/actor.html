@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div class="content-section">
+            {% if actor %}
+                <div class="row no-gutters bg-light position-relative">
+                    <div class="col-md-6 mb-md-0 p-md-4">
+                        <img src="..." class="w-100" alt="...">
+                    </div>
+                    <div class="col-md-6 position-static p-4 pl-md-0">
+                        <h5 class="mt-0">{{actor.actor_name}}</h5>
+                        
+                        <h6 class="mt-0">Starred in these movies:</h6>                    
+                        {% if actor.movies  %}                     
+                            {% for movie in actor.movies %}
+                                <div style="margin-top: 10px;">
+                                    <a
+                                        href="{{ url_for('movie', id=movie['id']) }}" style="color: black" > {{ movie.movie_title }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p> This actor does not have any movies. </p>
+                        {% endif %} 
+                    </div>
+                </div>
+                <hr>   
+            {% else %}
+                <p>...</p>
+            {% endif %}        
+            <a class="nav-link" href="/all_actors">Back to all actors</a>
+        </div>
+    {% endblock %}
