@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+    {% block content %}
+        <div>
+            <h1> Welcome to Movies database!  </h1>
+            {% if current_user.is_authenticated %}
+                <h6 style ="margin: auto;"> Please browse movies and actors.  </h6>
+            {% else %}
+                <h6 style ="margin: auto;"> Please register and login to see all movies and actors.  </h6>
+            {% endif %}
+        </div>
+    {% endblock %}
